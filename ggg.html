@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Change Text Example</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <p id="nameText">sam</p>
+  <button onclick="showInput()">Change Name</button>
+  <div id="inputContainer" style="display: none;">
+    <input type="password" id="currentPasswordInput" placeholder="Enter current password">
+    <input type="text" id="newNameInput" placeholder="Enter your new name">
+    <button onclick="changeName()">OK</button>
+    <button onclick="hideInput()">Cancel</button>
+    <p id="incorrectPasswordMessage" style="display: none; color: red;">Incorrect password</p>
+    <p id="enterNewNameMessage" style="display: none; color: red;">Enter your new name</p>
+  </div>
+  
+  <script>
+    const correctPassword = "123456";
+
+    function showInput() {
+      document.getElementById('inputContainer').style.display = 'block';
+      document.getElementById('incorrectPasswordMessage').style.display = 'none';
+      document.getElementById('enterNewNameMessage').style.display = 'none';
+    }
+
+    function hideInput() {
+      document.getElementById('inputContainer').style.display = 'none';
+      document.getElementById('currentPasswordInput').value = "";
+      document.getElementById('newNameInput').value = "";
+      document.getElementById('enterNewNameMessage').style.display = 'none';
+    }
+
+    function changeName() {
+      const currentPassword = document.getElementById('currentPasswordInput').value;
+      const newName = document.getElementById('newNameInput').value;
+
+      if (currentPassword === correctPassword) {
+        if (newName.trim() === "") {
+          document.getElementById('enterNewNameMessage').style.display = 'block';
+          document.getElementById('incorrectPasswordMessage').style.display = 'none';
+        } else {
+          document.getElementById('nameText').textContent = newName;
+          document.getElementById('inputContainer').style.display = 'none';
+          document.getElementById('incorrectPasswordMessage').style.display = 'none';
+          document.getElementById('enterNewNameMessage').style.display = 'none';
+          document.getElementById('currentPasswordInput').value = "";
+          document.getElementById('newNameInput').value = "";
+        }
+      } else {
+        document.getElementById('incorrectPasswordMessage').style.display = 'block';
+        document.getElementById('enterNewNameMessage').style.display = 'none';
+      }
+    }
+
+    // Detect Enter key press to trigger the changeName function
+    document.getElementById('newNameInput').addEventListener('keyup', function(event) {
+      if (event.key === 'Enter') {
+        changeName();
+      }
+    });
+  </script>
+</body>
+</html>

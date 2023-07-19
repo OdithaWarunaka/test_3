@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Adjust Div Height Based on Device Height</title>
+  <style>
+    /* Default styles for the container */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh; /* Set the container's minimum height to 100% of the viewport height */
+      background-color: #f0f0f0;
+      overflow: hidden; /* Hide any overflowing content outside the viewport */
+    }
+
+    /* Default styles for the div */
+    .adjustable-div {
+      background-color: #ccc;
+      padding: 20px;
+      box-sizing: border-box;
+      max-width: 80%; /* Set a maximum width to prevent the div from becoming too wide */
+      flex: 1; /* Allow the div to grow to fill the container */
+    }
+
+    /* Create a pseudo-element to push the content upwards */
+    .adjustable-div::before {
+      content: '';
+      display: block;
+      padding-top: 100%; /* This is the trick to make the div height adjust to the viewport height */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="adjustable-div">
+      <p>This div will adjust its height based on the device height.</p>
+    </div>
+  </div>
+</body>
+</html>
